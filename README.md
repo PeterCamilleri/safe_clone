@@ -1,6 +1,10 @@
 # SafeClone
 
-TODO: Write a gem description
+This tiny gem implements a version of clone called safe_clone. Unlike the
+standard clone method, the safe_clone method does not throw ant exception
+when sent to un-clonable objects like 42 or true. These simply return
+themselves and this is correct because those types of objects do not NEED
+to be cloned. Instead of blowing up in a hissy fit, the code just works!
 
 ## Installation
 
@@ -18,7 +22,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    require 'safe_clone'
+
+then, in those places where regular clone was problematic, use:
+
+    foo = my_object.safe_clone
+
+instead of
+
+    foo = my_object.clone
+
 
 ## Contributing
 
