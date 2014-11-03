@@ -53,6 +53,10 @@ class SafeCloneTester < MiniTest::Unit::TestCase
     arrb << 4
     assert_equal([1,2,3],   arra)
     assert_equal([1,2,3,4], arrb)
+
+    lam = lambda { puts 'hello world'}
+    refute_equal(lam.safe_clone.object_id, lam.object_id)
+
   end
 
 end
