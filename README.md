@@ -38,7 +38,7 @@ instead of
 
 ## Performance
 A reasonable question to raise is "How does safe clone compare with just
-catching the expeption and handling it?" The benchmark sets a a realistic
+catching the exception and handling it?" The benchmark sets a a realistic
 scenario where an array (whose contents may be varied) is having its
 _contents_ cloned. The benchmarking code follows:
 
