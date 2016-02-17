@@ -36,71 +36,107 @@ instead of
       foo = my_object
     end
 
-Further, when benchmarked under
+## Performance
+A reasonable question to raise is "How does safe clone compare with just
+catching the expeption and handling it?" The benchmark sets a a realistic
+scenario where an array (whose contents may be varied) is having its
+_contents_ cloned. The benchmarking code follows:
+
+```ruby
+require "benchmark/ips"
+require 'safe_clone'
+
+class Array
+  def use_clone
+    self.map do |element|
+      begin
+        element.clone
+      rescue TypeError
+        element
+      end
+    end
+  end
+
+  def use_safe_clone
+    self.map {|element| element.safe_clone }
+  end
+end
+
+X = ["Test", :test, 43, true, nil, false]
+
+Benchmark.ips do |x|
+  x.report("Clone with standard clone method") { X.use_clone }
+  x.report("Clone with the safe clone method") { X.use_safe_clone }
+  x.compare!
+end
+```
+
+Ruby Version:
 
     ruby 1.9.3p484 (2013-11-22) [i386-mingw32]
 
-the following results are observed:
+Results:
 
     C:\Sites\safe_clone>ruby bench\bench.rb
     Warming up --------------------------------------
     Clone with standard clone method
-                             6.424k i/100ms
+                             1.247k i/100ms
     Clone with the safe clone method
-                            97.476k i/100ms
+                            35.027k i/100ms
     Calculating -------------------------------------
     Clone with standard clone method
-                             72.460k (± 8.5%) i/s -    366.168k
+                             12.957k (± 5.8%) i/s -     64.844k
     Clone with the safe clone method
-                              4.690M (±33.3%) i/s -     20.957M
+                            534.740k (± 8.9%) i/s -      2.662M
 
     Comparison:
-    Clone with the safe clone method:  4690305.8 i/s
-    Clone with standard clone method:    72460.2 i/s - 64.73x slower
+    Clone with the safe clone method:   534740.1 i/s
+    Clone with standard clone method:    12956.6 i/s - 41.27x slower
 
-With:
+Ruby Version:
 
     ruby 2.1.6p336 (2015-04-13 revision 50298) [i386-mingw32]
 
-the following results are observed:
+Results:
 
     C:\Sites\safe_clone>ruby bench\bench.rb
     Warming up --------------------------------------
     Clone with standard clone method
-                            20.607k i/100ms
+                             4.945k i/100ms
     Clone with the safe clone method
-                           107.236k i/100ms
+                            38.109k i/100ms
     Calculating -------------------------------------
     Clone with standard clone method
-                            298.041k (±11.1%) i/s -      1.484M
+                             54.491k (± 7.3%) i/s -    271.975k
     Clone with the safe clone method
-                              4.934M (±34.5%) i/s -     22.091M
+                            569.236k (±10.2%) i/s -      2.820M
 
     Comparison:
-    Clone with the safe clone method:  4933871.9 i/s
-    Clone with standard clone method:   298041.4 i/s - 16.55x slower
+    Clone with the safe clone method:   569236.4 i/s
+    Clone with standard clone method:    54491.3 i/s - 10.45x slower
 
-And with:
+Ruby Version:
 
     ruby 2.2.3p173 (2015-08-18 revision 51636) [i386-cygwin]
 
-we get:
+Results:
 
+    Peter Camilleri@NCC1701G /cygdrive/c/sites/safe_clone
     $ ruby bench/bench.rb
     Warming up --------------------------------------
     Clone with standard clone method
-                            15.876k i/100ms
+                             3.698k i/100ms
     Clone with the safe clone method
-                            70.638k i/100ms
+                            28.999k i/100ms
     Calculating -------------------------------------
     Clone with standard clone method
-                            219.593k (±10.7%) i/s -      1.095M
+                             40.076k (± 5.1%) i/s -    203.390k
     Clone with the safe clone method
-                              4.525M (± 0.9%) i/s -     22.675M
+                            481.524k (±10.0%) i/s -      2.407M
 
     Comparison:
-    Clone with the safe clone method:  4524862.8 i/s
-    Clone with standard clone method:   219593.0 i/s - 20.61x slower
+    Clone with the safe clone method:   481524.1 i/s
+    Clone with standard clone method:    40075.6 i/s - 12.02x slower
 
 
 Overall: Shorter code  _and_ faster. Winner, winner, chicken dinner!
