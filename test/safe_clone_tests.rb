@@ -9,7 +9,7 @@ require          'minitest_visible'
 class SafeCloneTester < Minitest::Test
 
   #Track mini-test progress.
-  MinitestVisible.track self, __FILE__
+  include MinitestVisible
 
   def test_for_safe_value_cloning
     assert_equal((6).safe_clone, 6)
