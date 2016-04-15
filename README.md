@@ -19,6 +19,28 @@ Modifying such a crucial method was considered too risky. Instead, the
 safe_clone method is introduced. This is done to reduce the possibility of
 breaking existing code that often occurs when monkey patching goes too far.
 
+## Family Tree
+
+This gem is a member of a family of four gems that all provide data copying
+services in a safe, easy to use format. The following outlines the available
+gems and how to chose from among them.
+
+Depth / Action | Need to copy all. | Need to copy data only.
+---------------|------------------------------|------------
+Need a shallow copy | require 'safe\_clone' | require 'safe\_dup'
+Need a full copy    | require 'full\_clone' | require 'full\_dup'
+
+<br>**Notes**
+* Since none of these gems override the default clone and dup
+methods, the default behaviors remain available. Further, if multiple,
+differing requirements exists, more than one family member gem may be
+employed in the same project without fear of conflict.
+* If multiple family gems are employed, they will each need to be installed and
+required into the application. See below for details.
+* Meta-data attributes include the frozen status and singleton methods. However
+the tainted status is always copied.
+
+
 ## Installation
 
 Add this line to your application's Gemfile:
