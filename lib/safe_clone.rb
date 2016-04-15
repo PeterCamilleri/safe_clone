@@ -1,4 +1,4 @@
-require "safe_clone/version"
+require_relative "safe_clone/version"
 
 class Object
   #By default, reference types use the clone method.
