@@ -19,7 +19,7 @@ Modifying such a crucial method was considered too risky. Instead, the
 safe_clone method is introduced. This is done to reduce the possibility of
 breaking existing code that often occurs when monkey patching goes too far.
 
-## Family Tree
+## Family Overview
 
 This gem is a member of a family of four gems that all provide data copying
 services in a safe, easy to use format. The following outlines the available
