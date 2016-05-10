@@ -79,6 +79,12 @@ instead of
 It is actually pretty easy to determine where safe\_clone needs to be used. It's
 those places where the clone method is generating unwanted exceptions.
 
+## Demo
+
+A test bed for experimenting with the safe_clone gem is available as a rake task:
+
+    $ rake console
+
 ## Performance
 A reasonable question to raise is "How does safe clone compare with just
 catching the exception and handling it?" The benchmark sets a a realistic

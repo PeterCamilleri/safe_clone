@@ -8,6 +8,11 @@ Rake::TestTask.new do |t|
   t.verbose    = false
 end
 
+desc "Fire up an IRB session with safe_clone preloaded."
+task :console do
+  system "ruby irbt.rb local"
+end
+
 desc "What version of full_clone is this?"
 task :vers do |t|
   puts
