@@ -13,7 +13,7 @@ task :console do
   system "ruby irbt.rb local"
 end
 
-desc "What version of full_clone is this?"
+desc "What version of safe_clone is this?"
 task :vers do |t|
   puts
   puts "safe_clone version = #{SafeClone::VERSION}"
