@@ -2,8 +2,6 @@
 # An IRB + safe_clone test bed
 
 require 'irb'
-$force_alias_read_line_module = true
-require 'mini_readline'
 
 puts "Starting an IRB console with safe_clone loaded."
 
