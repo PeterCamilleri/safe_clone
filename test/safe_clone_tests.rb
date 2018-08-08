@@ -24,7 +24,7 @@ class SafeCloneTester < Minitest::Test
     assert_equal((false).safe_clone, false)
     assert_equal((false).safe_clone.object_id, (false).object_id)
 
-    assert_equal((nil).safe_clone, nil)
+    assert_nil((nil).safe_clone)
     assert_equal((nil).safe_clone.object_id, (nil).object_id)
 
     rex = /ABC/
