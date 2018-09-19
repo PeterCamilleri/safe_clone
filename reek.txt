@@ -1,0 +1,9 @@
+lib/safe_clone.rb -- 7 warnings:
+  [30]:IrresponsibleModule: FalseClass has no descriptive comment [https://github.com/troessner/reek/blob/v5.0.2/docs/Irresponsible-Module.md]
+  [22]:IrresponsibleModule: NilClass has no descriptive comment [https://github.com/troessner/reek/blob/v5.0.2/docs/Irresponsible-Module.md]
+  [3]:IrresponsibleModule: Object has no descriptive comment [https://github.com/troessner/reek/blob/v5.0.2/docs/Irresponsible-Module.md]
+  [38]:IrresponsibleModule: Regexp has no descriptive comment [https://github.com/troessner/reek/blob/v5.0.2/docs/Irresponsible-Module.md]
+  [34]:IrresponsibleModule: Symbol has no descriptive comment [https://github.com/troessner/reek/blob/v5.0.2/docs/Irresponsible-Module.md]
+  [42]:IrresponsibleModule: Thread has no descriptive comment [https://github.com/troessner/reek/blob/v5.0.2/docs/Irresponsible-Module.md]
+  [26]:IrresponsibleModule: TrueClass has no descriptive comment [https://github.com/troessner/reek/blob/v5.0.2/docs/Irresponsible-Module.md]
+7 total warnings
