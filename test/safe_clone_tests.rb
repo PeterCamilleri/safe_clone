@@ -3,13 +3,9 @@
 require_relative '../lib/safe_clone'
 gem              'minitest'
 require          'minitest/autorun'
-require          'minitest_visible'
 
 #Test the monkey patches applied to the Object class.
 class SafeCloneTester < Minitest::Test
-
-  #Track mini-test progress.
-  include MinitestVisible
 
   def test_for_safe_value_cloning
     assert_equal((6).safe_clone, 6)
